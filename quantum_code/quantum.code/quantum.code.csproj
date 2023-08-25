@@ -78,6 +78,22 @@
     <Compile Include="Core\Core.cs" />
     <Compile Include="Frame.User.cs" />
     <Compile Include="FrameContext.User.cs" />
+    <Compile Include="RTS\Implementation\Building\BuildingActions.cs" />
+    <Compile Include="RTS\Implementation\Building\BuildingComponent.cs" />
+    <Compile Include="RTS\Implementation\Doodad\DoodadActions.cs" />
+    <Compile Include="RTS\Implementation\Doodad\DoodadComponent.cs" />
+    <Compile Include="RTS\Implementation\Player\PlayerActions.cs" />
+    <Compile Include="RTS\Implementation\Player\PlayerCompoment.cs" />
+    <Compile Include="RTS\Implementation\Unit\UnitAction.cs" />
+    <Compile Include="RTS\Implementation\Unit\UnitComponent.cs" />
+    <Compile Include="RTS\Implementation\_Common\SkinAnimatorActions.cs" />
+    <Compile Include="RTS\Implementation\_Common\SkinAnimatorComponent.cs" />
+    <Compile Include="RTS\Implementation\_Common\ClientRefActions.cs" />
+    <Compile Include="RTS\Implementation\_Common\ClientRefComponent.cs" />
+    <Compile Include="RTS\Implementation\_Common\PlayerOwnerAction.cs" />
+    <Compile Include="RTS\Implementation\_Common\PlayerOwnerComponent.cs" />
+    <Compile Include="RTS\Implementation\_Common\SkinActions.cs" />
+    <Compile Include="RTS\Implementation\_Common\SkinComponent.cs" />
     <Compile Include="RuntimeConfig.User.cs" />
     <Compile Include="RuntimePlayer.User.cs" />
     <Compile Include="SimulationConfig.User.cs" />
@@ -88,6 +104,17 @@
     <EmbeddedResource Include="db.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="RTS\GameAPI\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="RTS\Implementation\Building\BuildingComponent.qtn" />
+    <None Include="RTS\Implementation\Doodad\DoodadComponent.qtn" />
+    <None Include="RTS\Implementation\Player\PlayerComponent.qtn" />
+    <None Include="RTS\Implementation\Unit\UnitComponent.qtn" />
+    <None Include="RTS\Implementation\_Common\SkinAnimatorComponent.qtn" />
+    <None Include="RTS\Implementation\_Common\ClientRefComponent.qtn" />
+    <None Include="RTS\Implementation\_Common\PlayerOwnerComponent.qtn" />
+    <None Include="RTS\Implementation\_Common\SkinComponent.qtn" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -1,0 +1,4 @@
+﻿component ClientRef
+{
+	player_ref clientID;
+}
