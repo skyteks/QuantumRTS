@@ -1,0 +1,3 @@
+﻿signal OnDamaged(entity_ref unitEntity);
+signal OnKilled(entity_ref unitEntity);
+signal OnHealed(entity_ref unitEntity);

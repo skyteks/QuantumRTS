@@ -80,12 +80,16 @@
     <Compile Include="FrameContext.User.cs" />
     <Compile Include="RTS\Implementation\Building\BuildingActions.cs" />
     <Compile Include="RTS\Implementation\Building\BuildingComponent.cs" />
+    <Compile Include="RTS\Implementation\Building\BuildingData.cs" />
     <Compile Include="RTS\Implementation\Doodad\DoodadActions.cs" />
     <Compile Include="RTS\Implementation\Doodad\DoodadComponent.cs" />
     <Compile Include="RTS\Implementation\Player\PlayerActions.cs" />
     <Compile Include="RTS\Implementation\Player\PlayerCompoment.cs" />
     <Compile Include="RTS\Implementation\Unit\UnitAction.cs" />
     <Compile Include="RTS\Implementation\Unit\UnitComponent.cs" />
+    <Compile Include="RTS\Implementation\Unit\UnitData.cs" />
+    <Compile Include="RTS\Implementation\_Common\HealthActions.cs" />
+    <Compile Include="RTS\Implementation\_Common\HealthComponent.cs" />
     <Compile Include="RTS\Implementation\_Common\SkinAnimatorActions.cs" />
     <Compile Include="RTS\Implementation\_Common\SkinAnimatorComponent.cs" />
     <Compile Include="RTS\Implementation\_Common\ClientRefActions.cs" />
@@ -108,9 +112,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="RTS\Implementation\Building\BuildingComponent.qtn" />
+    <None Include="RTS\Implementation\Building\BuildingSignals.qtn" />
     <None Include="RTS\Implementation\Doodad\DoodadComponent.qtn" />
     <None Include="RTS\Implementation\Player\PlayerComponent.qtn" />
     <None Include="RTS\Implementation\Unit\UnitComponent.qtn" />
+    <None Include="RTS\Implementation\Unit\UnitData.qtn" />
+    <None Include="RTS\Implementation\Unit\UnitySignals.qtn" />
+    <None Include="RTS\Implementation\_Common\HealthComponent.qtn" />
     <None Include="RTS\Implementation\_Common\SkinAnimatorComponent.qtn" />
     <None Include="RTS\Implementation\_Common\ClientRefComponent.qtn" />
     <None Include="RTS\Implementation\_Common\PlayerOwnerComponent.qtn" />

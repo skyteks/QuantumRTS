@@ -4,14 +4,52 @@ namespace Quantum
 {
     public static unsafe class UnitAction
     {
-        public static EntityRef Spawn(Frame frame, FPVector3 position, FPQuaternion rotation, FP colliderSize)
+        public static EntityRef Spawn(Frame frame, UnitData unitData, FPVector3 position, FPQuaternion rotation, FP colliderSize, FP healthPercentage)
         {
-            EntityRef unit = frame.Create();
-            frame.Set(unit, new Unit());
-            frame.Set(unit, Transform3D.Create(position, rotation));
+            EntityRef unitEntity = frame.Create();
+            frame.Set(unitEntity, new Unit(unitData));
+            frame.Set(unitEntity, Transform3D.Create(position, rotation));
             Shape3D shape = Shape3D.CreateSphere(colliderSize, new FPVector3(0, colliderSize, 0));
-            frame.Set(unit, PhysicsCollider3D.Create(frame, shape, null, false, 0));
-            return unit;
+            frame.Set(unitEntity, PhysicsCollider3D.Create(frame, shape, null, false, 0));
+            frame.Set(unitEntity, new Health(healthPercentage));
+            return unitEntity;
+        }
+
+        public static void TakeDamage(Frame frame, EntityRef unitEntity, FP damage)
+        {
+            Health* health = frame.Unsafe.GetPointer<Health>(unitEntity);
+            Unit* unit = frame.Unsafe.GetPointer<Unit>(unitEntity);
+            UnitData unitData = frame.FindAsset<UnitData>(unit->unitData.Id);
+
+            if (health->currentPercentage == 0)
+            {
+                return;
+            }
+
+            health->currentPercentage -= FPMath.Clamp01(damage / unitData.maxHealth);
+            if (health->currentPercentage == 0)
+            {
+                frame.Signals.OnKilled(unitEntity);
+            }
+            else
+            {
+                frame.Signals.OnDamaged(unitEntity);
+            }
+        }
+
+        public static void TakeHealing(Frame frame, EntityRef unitEntity, FP healing)
+        {
+            Health* health = frame.Unsafe.GetPointer<Health>(unitEntity);
+            Unit* unit = frame.Unsafe.GetPointer<Unit>(unitEntity);
+            UnitData unitData = frame.FindAsset<UnitData>(unit->unitData.Id);
+
+            if (health->currentPercentage == 0 || health->currentPercentage == 1)
+            {
+                return;
+            }
+
+            health->currentPercentage -= FPMath.Clamp01(healing / unitData.maxHealth);
+            frame.Signals.OnHealed(unitEntity);
         }
     }
 }

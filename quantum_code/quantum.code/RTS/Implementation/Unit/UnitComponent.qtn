@@ -1,3 +1,4 @@
 ﻿component Unit
 {
+	asset_ref<UnitData> unitData;
 }
