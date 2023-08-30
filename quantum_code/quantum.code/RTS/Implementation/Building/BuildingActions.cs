@@ -4,7 +4,7 @@ namespace Quantum
 {
     public static unsafe class BuildingActions
     {
-        public static EntityRef Spawn(Frame frame, UnitData unitData, FPVector3 position, FPQuaternion rotation, FP colliderSize, FP healthPercentage)
+        public static EntityRef Spawn(Frame frame, UnitData unitData, FPVector3 position, FPQuaternion rotation, int skinID, FP colliderSize, FP healthPercentage)
         {
             EntityRef unitEntity = frame.Create();
             frame.Set(unitEntity, new Unit(unitData));
@@ -12,6 +12,8 @@ namespace Quantum
             Shape3D shape = Shape3D.CreateSphere(colliderSize, new FPVector3(0, colliderSize, 0));
             frame.Set(unitEntity, PhysicsCollider3D.Create(frame, shape, null, false, 0));
             frame.Set(unitEntity, new Health(healthPercentage));
+            frame.Set(unitEntity, new Skin(skinID));
+            frame.Set(unitEntity, new SkinAnimator());
             return unitEntity;
         }
 
