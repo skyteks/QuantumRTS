@@ -11,7 +11,15 @@ namespace Quantum
         public int skinID;
         public int iconID;
 
+        [Space]
+
         [Header("Stats")]
         public FP maxHealth;
+
+        public FP movementSpeed;
+
+        public FP visionRadius;
+
+
     }
 }

@@ -15,41 +15,39 @@ namespace Quantum
             return unitEntity;
         }
 
-        public static void TakeDamage(Frame frame, EntityRef unitEntity, FP damage)
+        public static void RecieveDamage(Frame frame, EntityRef unitEntity, FP damage)
         {
             Health* health = frame.Unsafe.GetPointer<Health>(unitEntity);
             Unit* unit = frame.Unsafe.GetPointer<Unit>(unitEntity);
             UnitData unitData = frame.FindAsset<UnitData>(unit->unitData.Id);
 
-            if (health->currentPercentage == 0)
-            {
-                return;
-            }
+            bool destroyed;
+            bool success = health->Damage(damage, unitData.maxHealth, out destroyed);
 
-            health->currentPercentage -= FPMath.Clamp01(damage / unitData.maxHealth);
-            if (health->currentPercentage == 0)
+            if (success)
             {
-                frame.Signals.OnDestroyed(unitEntity);
-            }
-            else
-            {
-                frame.Signals.OnDamaged(unitEntity);
+                if (destroyed)
+                {
+                    frame.Signals.OnDestroyed(unitEntity);
+                }
+                else
+                {
+                    frame.Signals.OnDamaged(unitEntity);
+                }
             }
         }
 
-        public static void TakeRepair(Frame frame, EntityRef unitEntity, FP repair)
+        public static void RecieveRepair(Frame frame, EntityRef unitEntity, FP repair)
         {
             Health* health = frame.Unsafe.GetPointer<Health>(unitEntity);
             Unit* unit = frame.Unsafe.GetPointer<Unit>(unitEntity);
             UnitData unitData = frame.FindAsset<UnitData>(unit->unitData.Id);
 
-            if (health->currentPercentage == 0 || health->currentPercentage == 1)
+            bool success = health->Heal(repair, unitData.maxHealth);
+            if (success)
             {
-                return;
+                frame.Signals.OnRepaired(unitEntity);
             }
-
-            health->currentPercentage -= FPMath.Clamp01(repair / unitData.maxHealth);
-            frame.Signals.OnRepaired(unitEntity);
         }
     }
 }
