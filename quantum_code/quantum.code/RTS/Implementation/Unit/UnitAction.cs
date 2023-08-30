@@ -56,5 +56,19 @@ namespace Quantum
                 frame.Signals.OnRepaired(unitEntity);
             }
         }
+
+        public static void SetSkin(Frame frame, EntityRef unitEntity, int newSkinID)
+        {
+            Skin* skin = frame.Unsafe.GetPointer<Skin>(unitEntity);
+
+            skin->ChangeSkinID(newSkinID);
+        }
+
+        public static void SetSkinAnimation(Frame frame, EntityRef unitEntity, int animationID, float startTime, float endTime)
+        {
+            SkinAnimator* animator = frame.Unsafe.GetPointer<SkinAnimator>(unitEntity);
+
+            animator->Animate(animationID, startTime, endTime);
+        }
     }
 }
